@@ -14,7 +14,7 @@ Route::post('login', [AuthController::class, "login"]);
 Route::middleware([IsUserAuth::class])->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::post('logout', 'logout');
-        Route::post('me', 'me');
+        Route::get('me', 'getUser');
     });
 
     Route::get("products", [ProductsController::class, "getProducts"]);
@@ -24,7 +24,7 @@ Route::middleware([IsUserAuth::class])->group(function () {
             Route::post('products', 'addProduct');
             Route::get('/products/{id}', 'getProductById');
             Route::patch('/products/{id}', 'updateProductById');
-            Route::delete('/products/{id}', 'delteProductById');
+            Route::delete('/products/{id}', 'deleteProductById');
         });
     });
 });
