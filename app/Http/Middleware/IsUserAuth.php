@@ -15,6 +15,12 @@ class IsUserAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if (auth("api")->user()) {
+            return $next($request);
+        } else {
+            return response()->json([
+                "message" => "You are not authorized to access this resource."
+            ], 401);
+        }
     }
 }
